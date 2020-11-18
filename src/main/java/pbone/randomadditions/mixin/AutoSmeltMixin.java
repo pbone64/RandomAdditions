@@ -37,7 +37,7 @@ public abstract class AutoSmeltMixin {
                     SmeltingRecipe recipe = world.getRecipeManager().getFirstMatch(RecipeType.SMELTING, new SimpleInventory((itemStack)), world).orElse(null);
                     if (recipe != null) {
                         // Drop it if there is
-                        drop = recipe.getOutput();
+                        drop = recipe.getOutput().copy();
                     }
                     // Drop the smelted version
                     Block.dropStack(world, pos, drop);
