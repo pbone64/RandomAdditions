@@ -2,6 +2,7 @@ package pbone.randomadditions.content.items;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,13 +20,18 @@ public class TestItem extends Item {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand){
-        MinecraftClient.getInstance().player.sendChatMessage("Hello, world!");
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand) {
+        ClientPlayerEntity clientPlayer = MinecraftClient.getInstance().player;
+
+        if (clientPlayer != null) {
+            MinecraftClient.getInstance().player.sendChatMessage("Hello, world!");
+        }
+
         return TypedActionResult.success(playerEntity.getStackInHand(hand));
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext tooltipContext){
+    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
         tooltip.add(new TranslatableText("item.randomadditions.test_item.tooltip"));
     }
 }

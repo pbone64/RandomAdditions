@@ -17,6 +17,7 @@ public class QuiverItem extends ArrowItem {
     public PersistentProjectileEntity createArrow(World world, ItemStack stack, LivingEntity shooter) {
         ArrowEntity arrowEntity = new ArrowEntity(world, shooter);
         arrowEntity.initFromStack(new ItemStack(Items.ARROW));
+
         return arrowEntity;
     }
 }
