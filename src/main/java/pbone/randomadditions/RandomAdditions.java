@@ -9,6 +9,7 @@ public class RandomAdditions implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        // Initialize our loaders.
         ItemLoader.onInitialize();
         EnchantmentLoader.onInitialize();
     }
