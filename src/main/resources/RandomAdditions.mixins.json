@@ -4,9 +4,10 @@
   "package": "pbone.randomadditions.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ArmorToughnessMixin",
     "AutoSmeltMixin",
-    "QuiverMixin",
-    "OptionsScreenMixin"
+    "OptionsScreenMixin",
+    "QuiverMixin"
   ],
   "client": [
   ],

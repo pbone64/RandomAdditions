@@ -3,7 +3,6 @@ package pbone.randomadditions.client;
 import com.google.common.base.Splitter;
 import com.google.common.io.Files;
 import com.google.gson.Gson;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.nbt.CompoundTag;
 import org.apache.commons.compress.utils.Charsets;
 import org.apache.logging.log4j.LogManager;

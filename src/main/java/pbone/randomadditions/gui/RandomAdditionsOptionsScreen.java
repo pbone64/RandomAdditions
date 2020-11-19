@@ -17,6 +17,7 @@ public class RandomAdditionsOptionsScreen extends Screen {
     @Override
     protected void init() {
         this.addButton(new ButtonWidget(this.width / 2 - 100, this.height / 6 + 168, 200, 20, new TranslatableText("gui.done"), (var1x) -> {
+            assert this.client != null;
             this.client.openScreen(this.lastScreen);
         }));
     }
