@@ -14,7 +14,7 @@ import pbone.randomadditions.content.items.TestItem;
 
 public class ItemLoader {
     public static final TestItem TEST_ITEM = new TestItem(new FabricItemSettings().group(ItemGroup.MISC).rarity((Rarity.EPIC)));
-    public static final QuiverItem QUIVER = new QuiverItem(new FabricItemSettings().group(ItemGroup.COMBAT));
+    public static final QuiverItem QUIVER = new QuiverItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
 
     public static void onInitialize(){
         Registry.register(Registry.ITEM, LoaderUtils.ModId("test_item"), TEST_ITEM);
