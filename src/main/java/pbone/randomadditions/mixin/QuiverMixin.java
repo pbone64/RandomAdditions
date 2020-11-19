@@ -15,7 +15,7 @@ public class QuiverMixin {
                     target = "Lnet/minecraft/item/ItemStack;decrement(I)V"))
     private void consumeQuiverArrow(ItemStack itemStack, int amount) {
         if (itemStack.getItem() instanceof QuiverItem) {
-            QuiverItem quiver = (QuiverItem)itemStack.getItem();
+            QuiverItem quiver = (QuiverItem) itemStack.getItem();
         } else {
             itemStack.decrement(amount);
         }
