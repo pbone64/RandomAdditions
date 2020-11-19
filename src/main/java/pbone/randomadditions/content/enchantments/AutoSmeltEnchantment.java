@@ -11,21 +11,21 @@ public class AutoSmeltEnchantment extends Enchantment {
     }
 
     @Override
-    public int getMinPower(int level){
+    public int getMinPower(int level) {
         return 15;
     }
 
-    public int getMaxPower(int level){
+    public int getMaxPower(int level) {
         return super.getMinPower(level) + 50;
     }
 
     @Override
-    public int getMaxLevel(){
+    public int getMaxLevel() {
         return 1;
     }
 
     @Override
-    public boolean canAccept(Enchantment other){
+    public boolean canAccept(Enchantment other) {
         return super.canAccept(other) && other != Enchantments.SILK_TOUCH;
     }
 }

@@ -9,10 +9,13 @@ import pbone.randomadditions.content.items.QuiverItem;
 
 @Mixin(BowItem.class)
 public class QuiverMixin {
-    @Redirect(method = "onStoppedUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;decrement(I)V"))
+    @Redirect(method = "onStoppedUsing",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/item/ItemStack;decrement(I)V"))
     private void consumeQuiverArrow(ItemStack itemStack, int amount) {
         if (itemStack.getItem() instanceof QuiverItem) {
-            QuiverItem quiver = (QuiverItem)itemStack.getItem();
+            QuiverItem quiver = (QuiverItem) itemStack.getItem();
         } else {
             itemStack.decrement(amount);
         }

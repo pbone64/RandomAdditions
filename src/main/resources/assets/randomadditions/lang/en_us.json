@@ -2,5 +2,9 @@
     "item.randomadditions.test_item": "Test Item",
     "item.randomadditions.test_item.tooltip": "§7Yeehaw",
     "item.randomadditions.quiver": "Quiver",
-    "enchantment.randomadditions.auto_smelt": "Smelting Touch"
+
+    "enchantment.randomadditions.auto_smelt": "Smelting Touch",
+
+    "gui.randomadditions.randomadditionsoptions": "Random Additions Options",
+    "gui.randomadditions.toughnessoverlay": "Armor Toughness Overlay"
 }
