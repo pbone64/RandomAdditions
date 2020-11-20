@@ -6,6 +6,7 @@ import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
@@ -31,31 +32,32 @@ public abstract class ArmorToughnessMixin extends DrawableHelper {
     @Inject(method="renderStatusBars", at = @At("TAIL"))
     private void renderStatusBars(MatrixStack matrices, CallbackInfo ci) {
         client.getTextureManager().bindTexture(ICONS);
-        client.getProfiler().push("armortoughness");
 
         PlayerEntity playerEntity = getCameraPlayer();
         int scaledScaledHeight = this.scaledHeight - 39;
-        int scaledScaledWidth = scaledWidth / 2 - 91;
-        float maxHealth = (float)playerEntity.getAttributeValue(EntityAttributes.GENERIC_MAX_HEALTH);
-        int absorptionAmount = MathHelper.ceil(playerEntity.getAbsorptionAmount());
-        int yModifier = MathHelper.ceil((maxHealth + (float)absorptionAmount) / 2.0F / 10.0F);
-        int clampedYModifier = Math.max(10 - (yModifier - 2), 3);
-        int origY = scaledScaledHeight - (yModifier - 1) * clampedYModifier - 10;
+        int scaledScaledWidth = scaledWidth / 2 + 90;
+        this.client.getProfiler().swap("air");
+        int ah = playerEntity.getMaxAir();
+        int ai = Math.min(playerEntity.getAir(), ah);
+        int yModifier = playerEntity.isSubmergedIn(FluidTags.WATER) || ai < ah ? 10 : 0;
+        int origY = scaledScaledHeight - yModifier - 10;
         int armorToughness = (int)playerEntity.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS);
 
-        for(int i = 0; i < 10; i++) {
+        int origX;
+        for(int i = 10; i >0; i--) {
             if (armorToughness > 0) {
-                int origX = scaledScaledWidth + i * 8;
+                origX = scaledScaledWidth - i * 8;
+
                 if (i * 2 + 1 < armorToughness) {
-                    this.drawTexture(matrices, origX, origY, 34, 9, 9, 9);
+                    this.drawTexture(matrices, origX, origY, 18, 0, 9, 9);
                 }
 
                 if (i * 2 + 1 == armorToughness) {
-                    this.drawTexture(matrices, origX, origY, 25, 9, 9, 9);
+                    this.drawTexture(matrices, origX, origY, 9, 0, 9, 9);
                 }
 
                 if (i * 2 + 1 > armorToughness) {
-                    this.drawTexture(matrices, origX, origY, 16, 9, 9, 9);
+                    this.drawTexture(matrices, origX, origY, 0, 0, 9, 9);
                 }
             }
         }
