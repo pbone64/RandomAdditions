@@ -18,6 +18,8 @@ import pbone.randomadditions.RandomAdditions;
 
 @Mixin(InGameHud.class)
 public abstract class ArmorToughnessMixin extends DrawableHelper {
+    private static final Identifier ICONS = new Identifier(RandomAdditions.MOD_ID, "textures/gui/icons.png");
+
     @Shadow private int scaledWidth;
 
     @Shadow protected abstract PlayerEntity getCameraPlayer();
@@ -28,30 +30,36 @@ public abstract class ArmorToughnessMixin extends DrawableHelper {
 
     @Inject(method="renderStatusBars", at = @At("TAIL"))
     private void renderStatusBars(MatrixStack matrices, CallbackInfo ci) {
+        client.getTextureManager().bindTexture(ICONS);
         client.getProfiler().push("armortoughness");
+
         PlayerEntity playerEntity = getCameraPlayer();
-        int scaledWidthScaled = scaledWidth / 2;
-        int armorToughness = MathHelper.floor(playerEntity.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
-        int armorToughnessYPos = scaledHeight - 39 - (MathHelper.ceil(((float)playerEntity.getAttributeValue(EntityAttributes.GENERIC_MAX_HEALTH) + (float)MathHelper.ceil(playerEntity.getAbsorptionAmount())) / 2.0F / 10.0F) - 1) * Math.max(10 - (MathHelper.ceil(((float)playerEntity.getAttributeValue(EntityAttributes.GENERIC_MAX_HEALTH) + (float)MathHelper.ceil(playerEntity.getAbsorptionAmount())) / 2.0F / 10.0F) - 2), 3) - 10 + 11;
+        int scaledScaledHeight = this.scaledHeight - 39;
+        int scaledScaledWidth = scaledWidth / 2 - 91;
+        float maxHealth = (float)playerEntity.getAttributeValue(EntityAttributes.GENERIC_MAX_HEALTH);
+        int absorptionAmount = MathHelper.ceil(playerEntity.getAbsorptionAmount());
+        int yModifier = MathHelper.ceil((maxHealth + (float)absorptionAmount) / 2.0F / 10.0F);
+        int clampedYModifier = Math.max(10 - (yModifier - 2), 3);
+        int origY = scaledScaledHeight - (yModifier - 1) * clampedYModifier - 10;
+        int armorToughness = (int)playerEntity.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS);
 
-        client.getTextureManager().bindTexture(new Identifier(RandomAdditions.MOD_ID, "textures/icons/toughness.png"));
-
-        for (int i = 0; i < 10; i++) {
+        for(int i = 0; i < 10; i++) {
             if (armorToughness > 0) {
-                int armorToughnessXPos = scaledWidthScaled + (i * 8);
-
+                int origX = scaledScaledWidth + i * 8;
                 if (i * 2 + 1 < armorToughness) {
-                    drawTexture(matrices, armorToughnessXPos, armorToughnessYPos, 18, 0, 9, 9);
+                    this.drawTexture(matrices, origX, origY, 34, 9, 9, 9);
                 }
 
-                if (i * 2 + 1 == i) {
-                    drawTexture(matrices, armorToughnessXPos, armorToughnessYPos, 9, 0, 9, 9);
+                if (i * 2 + 1 == armorToughness) {
+                    this.drawTexture(matrices, origX, origY, 25, 9, 9, 9);
                 }
 
-                if (i * 2 + 1 > i) {
-                    drawTexture(matrices, armorToughnessXPos, armorToughnessYPos, 0, 0, 9, 9);
+                if (i * 2 + 1 > armorToughness) {
+                    this.drawTexture(matrices, origX, origY, 16, 9, 9, 9);
                 }
             }
         }
+
+        client.getProfiler().pop();
     }
 }
