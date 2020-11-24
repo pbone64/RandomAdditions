@@ -18,9 +18,21 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    // Curios
+    modImplementation "top.theillusivec4.curios:curios-fabric:0.0.10-1.16.3"
 
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
+}
+
+repositories {
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
+    maven {
+        name = "Ladysnake Libs"
+        url = 'https://dl.bintray.com/ladysnake/libs'
+    }
 }
 
 processResources {
@@ -71,7 +83,5 @@ publishing {
 
     // select the repositories you want to publish to
     repositories {
-        // uncomment to publish to the local maven
-        // mavenLocal()
     }
 }
