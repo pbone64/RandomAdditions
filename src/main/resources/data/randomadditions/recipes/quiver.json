@@ -7,7 +7,7 @@
   ],
   "key": {
     "R": {
-      "tag": "minecraft:rabbit_hide"
+      "item": "minecraft:rabbit_hide"
     },
     "A": {
       "item": "minecraft:arrow"
