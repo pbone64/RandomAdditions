@@ -2,6 +2,8 @@
     "item.randomadditions.test_item": "Test Item",
     "item.randomadditions.test_item.tooltip": "§7Yeehaw",
     "item.randomadditions.quiver": "Quiver",
+    "item.randomadditions.ring_base": "Mundane Ring",
+    "item.randomadditions.ring_luck": "Lucky Ring",
 
     "enchantment.randomadditions.auto_smelt": "Smelting Touch",
 

@@ -8,6 +8,7 @@ public class CuriosLoader {
     public static final String RING_ID = SlotTypePreset.RING.getIdentifier();
 
     public static void onInitialize() {
+        // Register Curios slots
         registerSlot(SlotTypePreset.RING.getInfoBuilder().size(2).build());
         registerSlot(SlotTypePreset.BACK.getInfoBuilder().build());
         registerSlot(SlotTypePreset.CHARM.getInfoBuilder().build());
